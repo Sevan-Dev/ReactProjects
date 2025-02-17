@@ -6,13 +6,13 @@ function App() {
   const [selectedCountry, setSelectedCountry] = useState(null);
 
   useEffect(() => {
-    fetch("https://restcountries.com/v3.1/region/europe")
+    fetch("https://restcountries.com/v3.1/all")
       .then(response => response.json())
       .then(data => {
         setFlags(data.map(country => ({
           name: country.name.common,
           flag: country.flags.svg,
-          languages: Object.values(country.languages).join(", "), // Convert object to string
+          languages: country.languages ? Object.values(country.languages).join(", ") : "N/A",
           capital: country.capital?.[0] || "N/A",
           population: country.population,
           cca3: country.cca3
